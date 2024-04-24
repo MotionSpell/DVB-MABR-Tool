@@ -1,4 +1,5 @@
 import sys
+sys.path.append('/usr/local/share/gpac/python')
 import configparser
 import libgpac as gpac
 
