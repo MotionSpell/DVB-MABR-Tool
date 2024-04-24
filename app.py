@@ -51,7 +51,7 @@ def main():
     opts = ["myapp"]
     opts.append("-no-block")
     gpac.set_args(opts)
-    gpac.set_logs("route@info")
+    gpac.set_logs("http@info")
 
     # Create session
     fs = gpac.FilterSession()
@@ -69,7 +69,7 @@ def main():
             src = fs.load_src(src_filter)
             aenc = fs.load(f"ffenc:c={src_args.get('a_enc', 'aac')}")
             venc = fs.load(f"ffenc:c={src_args.get('v_enc', 'avc')}")
-            dasher = fs.load("dasher:dynamic:profile=live:segdur=2:cdur=0.2:asto=1.6:dmode=dynamic")
+            dasher = fs.load("dasher:dynamic:profile=live")
 
         # Load destination filter for server mode
         dst_filter = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}{server_args['manifest_dst']}"
@@ -85,7 +85,7 @@ def main():
         
         #load http server
         dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
-        print(f"playback link   :{gateway_args['ip_addr']}:{gateway_args['port_addr']}{gateway_args['dst']}")
+        print(f"playback link   :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}{gateway_args['dst']}")
         dst = fs.load_dst(dst_sess)
         
     else:
