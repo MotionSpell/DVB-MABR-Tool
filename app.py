@@ -51,7 +51,7 @@ def main():
     opts = ["myapp"]
     opts.append("-no-block")
     gpac.set_args(opts)
-    #gpac.set_logs("route@info")
+    gpac.set_logs("route@info")
 
     # Create session
     fs = gpac.FilterSession()
