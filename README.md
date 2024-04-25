@@ -1,6 +1,8 @@
-# DVB-MABR-Tool 
+# DVB-MABR-Tool
 
-The repository contains a Python script (`app.py`), a configuration file (`config.ini`), and three scripts for launching the application in different modes.
+Welcome to the [DVB-MABR Validation Tool](https://dvb.org/news/rfp-released-for-dvb-mabr-validation-tool/).
+
+The repository contains a Python script (`app.py`), a configuration file (`config.ini`), and three scripts for launching the application in the different modes described in the RfP a/o the V2V document.
 
 ## Description
 
@@ -9,8 +11,10 @@ The Python script `app.py` is designed to configure and run a media processing a
 ## Requirements
 
 - Python 3.x
-- GPAC library
-- Theoplayer or GPAC player for viewing the stream (optional)
+- GPAC library (libgpac.so/.dll/.dylib):
+   1. installed with the default prefix (```/usr/local```) and
+   2. accessible from your shell (Windows: ```export PATH=``` ; Linux: ```export LD_LIBRARY_PATH=``` ; MacOS: ```export DYLD_LIBRARY_PATH=```)
+- A MPEG-DASH player (GPAC, dash.js, Theoplayer, ...) for viewing the stream (optional)
 
 ## Usage
 
@@ -41,14 +45,15 @@ The Python script `app.py` is designed to configure and run a media processing a
 
 ## Note
 
+Troubleshoot:
 - Ensure that the GPAC library is properly installed and on your system.
 - Additional parameters and configurations can be added to the `config.ini` file as needed.
 - The GPAC Python bindings use ctypes for interfacing with libgpac filter session, while providing an object-oriented wrapper hiding all ctypes internals and GPAC C design.
 
 You must:
-- use the bindings which come along with your GPAC installation, otherwise ABI/API might mismatch, resulting in crashes.
-- use a regular GPAC build, not a static library version (so python bindings are not compatible with mp4box-only build).
-- make sure the libgpac shared library is known to your dynamic library loader.
+- Use the bindings which come along with your GPAC installation, otherwise ABI/API might mismatch, resulting in crashes.
+- Use a regular GPAC build, not a static library version (so python bindings are not compatible with static or mp4box-only build).
+- Make sure the libgpac shared library is known to your dynamic library loader.
 
 The binding is called libgpac.py, and is by default available in GPAC share folder, for example /usr/share/gpac/python. It is hosted in GPAC source tree under share/python.
 
@@ -60,5 +65,5 @@ The Python module handler is furthermore very likely not configured to look at t
 Alternatively you can use pip to install the binding. 
 
 for more information on this visit:
-the wiki page: [wiki](https://wiki.gpac.io/Howtos/python/?h=python)
+the wiki page: [wiki](https://wiki.gpac.io/Howtos/python/)
 or this post:  [github discussion](https://github.com/gpac/gpac/issues/2161#issuecomment-1087281505)

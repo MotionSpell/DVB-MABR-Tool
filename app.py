@@ -1,5 +1,7 @@
+#!/usr/bin/python3
+
 import sys
-sys.path.append('/usr/local/share/gpac/python')
+sys.path.append('/opt/gpac/share/gpac/python')
 import configparser
 import libgpac as gpac
 
@@ -24,7 +26,7 @@ def load_configuration(config_file):
 def main():
     # Parse command-line arguments
     if len(sys.argv) < 2:
-        print("Usage: python program.py <config_file>")
+        print("Usage: python app.py <config_file>")
         return
 
     config_file = sys.argv[1]
