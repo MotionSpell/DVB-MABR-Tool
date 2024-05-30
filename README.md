@@ -32,11 +32,12 @@ The Python script `app.py` is designed to configure and run a media processing a
      ```
 
 3. **Running Examples:**
-   - The repository provides an example script (`run_example.sh`) using gpac generated content via the avgen filter to demonstrate the sequential execution of server and gateway modes. This script can be executed to automatically run the server followed by the gateway.
+   - The repository provides a script (`run_servers.sh`) using the TAD streaming content to demonstrate the sequential execution of server and gateway modes. This script can be executed to automatically run the servers.
    - Example usage:
      ```bash
-     ./run_example_1.sh
+     ./run_servers.sh
      ```
+     Than chose wich TAD stream to excute
 
 4. **Viewing the Stream:**
    - After launching the application, you can use Theoplayer or GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
