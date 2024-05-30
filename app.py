@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-
+import subprocess
 import sys
-sys.path.append('/opt/gpac/share/gpac/python')
 import configparser
+gpac_prefix = subprocess.check_output(['pkg-config', '--variable=prefix', 'gpac']).decode('utf-8').strip()
+share_folder = gpac_prefix + '/share/gpac/python/'
+sys.path.append(share_folder)
 import libgpac as gpac
 
 def load_configuration(config_file):
