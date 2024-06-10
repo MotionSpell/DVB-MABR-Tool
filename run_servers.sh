@@ -6,6 +6,8 @@ stream_sources=(
     "https://livesim2.dashif.org/livesim2/mup_30/testpic_2s/Manifest.mpd"
     "https://livesim2.dashif.org/livesim2/segtimeline_1/testpic_2s/Manifest.mpd"
     "https://livesim2.dashif.org/livesim2/periods_60/continuous_1/testpic_2s/Manifest.mpd"
+    "https://akamaibroadcasteruseast.akamaized.net/cmaf/live/657078/akasource/out.mpd"
+    "https://cmafref.akamaized.net/cmaf/live-ull/2006350/akambr/out.mpd"
 )
 
 # Function to launch server
@@ -21,7 +23,9 @@ echo "A: Live segment template without manifest updates"
 echo "B: Live segment template with manifest updates every 30s"
 echo "C: Live segment timeline with manifest updates every 30s"
 echo "D: Multi-period, 1 period per minute"
-echo "E: All streams"
+echo "E: low-latency single rate"
+echo "F: low-latency multi rate"
+
 read -r choice
 
 # Launch server based on user choice
@@ -39,9 +43,10 @@ case "$choice" in
         launch_server "${stream_sources[3]}"
         ;;
     E)
-        for ((i=0; i<${#stream_sources[@]}; i++)); do
-            launch_server "${stream_sources[i]}"
-        done
+        launch_server "${stream_sources[4]}"
+        ;;
+    F)
+        launch_server "${stream_sources[5]}"
         ;;
     *)
         echo "Invalid choice. Exiting."
