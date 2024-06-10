@@ -14,7 +14,8 @@ stream_sources=(
 launch_server() {
     local src="$1"
     local dst="$2"
-    ./scripts/launch_server.sh "$src" "$dst" &
+    local llmode="${3:-false}"  # Default to false if not provided
+    ./scripts/launch_server.sh "$src" "$dst" "$llmode" &
 }
 
 # Ask user for choice
@@ -43,10 +44,10 @@ case "$choice" in
         launch_server "${stream_sources[3]}"
         ;;
     E)
-        launch_server "${stream_sources[4]}"
+        launch_server "${stream_sources[4]}" "" true
         ;;
     F)
-        launch_server "${stream_sources[5]}"
+        launch_server "${stream_sources[5]}" "" true
         ;;
     *)
         echo "Invalid choice. Exiting."

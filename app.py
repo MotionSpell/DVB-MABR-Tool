@@ -76,7 +76,10 @@ def main():
             dasher = fs.load("dasher:dynamic:profile=live")
 
         # Load destination filter for server mode
-        dst_filter = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}{server_args['manifest_dst']}"
+        if server_args['llmode'] == "true":
+            dst_filter = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}{server_args['manifest_dst']}:llmode"
+        else:
+            dst_filter = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}{server_args['manifest_dst']}"
         dst = fs.load_dst(dst_filter)
     
     elif mode == 'gateway':
