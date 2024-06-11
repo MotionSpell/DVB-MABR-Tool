@@ -37,9 +37,24 @@ The Python script `app.py` is designed to configure and run a media processing a
      ```bash
      ./run_servers.sh
      ```
-     Than chose wich TAD stream to excute
+     Than chose wich TAD stream to excute:
 
-     run ./script/launch_gateway.sh to run the gateway in default configuration
+     ```bash
+     Choose a stream source:
+     A: Live segment template without manifest updates
+     B: Live segment template with manifest updates every 30s
+     C: Live segment timeline with manifest updates every 30s
+     D: Multi-period, 1 period per minute
+     E: low-latency single rate
+     F: low-latency multi rate
+     ```
+
+     than run this command    
+     ```bash
+      ./script/launch_gateway.sh 
+     ``` 
+     
+     to launch the gateway in default configuration
 
 4. **Viewing the Stream:**
    - After launching the application, you can use dash.js or GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
