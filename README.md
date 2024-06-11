@@ -39,10 +39,12 @@ The Python script `app.py` is designed to configure and run a media processing a
      ```
      Than chose wich TAD stream to excute
 
+     run ./script/launch_gateway.sh to run the gateway in default configuration
+
 4. **Viewing the Stream:**
-   - After launching the application, you can use Theoplayer or GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
-   - (by default: http://127.0.0.1:8080/live.mpd)
-   - to use theoplayer you will need to install a cors extension for your browser.
+   - After launching the application, you can use dash.js or GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
+   - (by default: http://127.0.0.1:8080/Manifest.mpd)
+   - to use dash.js you will need to install a cors extension for your browser.
 
 ## Note
 
