@@ -51,7 +51,7 @@ The Python script `app.py` is designed to configure and run a media processing a
 
      than run this command    
      ```bash
-      ./script/launch_gateway.sh 
+      ./scripts/launch_gateway.sh 
      ``` 
      
      to launch the gateway in default configuration
