@@ -76,21 +76,21 @@ def main():
             dasher = fs.load("dasher:dynamic:profile=live")
 
         # Load destination filter for server mode
-        dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}{server_args['manifest_dst']}:furl={server_args['furl']}"
-        dst_filter = dst_filter_base + (":llmode" if server_args['llmode'] == "true" else "")
+        dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}:furl={server_args['fdt_absolute_url']}:carousel={server_args['carousel']}"
+        dst_filter = dst_filter_base + (":llmode" if server_args['low_latency'] == "true" else "")
         dst = fs.load_dst(dst_filter)
     
     elif mode == 'gateway':
         # Load source for gateway
-        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}{gateway_args['manifest_src']}"
+        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}/{gateway_args['manifest_src']}"
         src = fs.load_src(src_sess)
 
         # load dasher 
         dasher= fs.load("dashin:forward=file")
         
         #load http server
-        dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
-        print(f"playback link   :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}{gateway_args['dst']}")
+        dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
+        print(f"playback link   :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}")
         dst = fs.load_dst(dst_sess)
         
     else:
