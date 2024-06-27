@@ -55,7 +55,10 @@ def main():
     opts = ["myapp"]
     opts.append("-no-block")
     gpac.set_args(opts)
-    gpac.set_logs("route@debug")
+    if mode == 'server':
+        gpac.set_logs("route@info")
+    elif mode == 'gateway':
+        gpac.set_logs("http@info")
 
     # Create session
     fs = gpac.FilterSession()
@@ -82,7 +85,7 @@ def main():
     
     elif mode == 'gateway':
         # Load source for gateway
-        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}/{gateway_args['manifest_src']}"
+        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}"
         src = fs.load_src(src_sess)
 
         # load dasher 
