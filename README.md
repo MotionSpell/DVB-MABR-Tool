@@ -21,17 +21,7 @@ The Python script `app.py` is designed to configure and run a media processing a
 1. **Configuration Setup:**
    - Modify the `config.ini` file to customize settings according to your requirements. Ensure that all necessary parameters are correctly set for the chosen mode (`server` or `gateway`).
    
-2. **Launching the Application:**
-   - Execute the appropriate launch script based on the desired mode:
-     - For running in server mode, execute `launch_server.sh`.
-     - For running in gateway mode, execute `launch_gateway.sh`.
-   - Example usage:
-     ```bash
-     ./scripts/launch_server.sh
-     ./scripts/launch_gateway.sh
-     ```
-
-3. **Running Examples:**
+2. **Running Examples:**
    - The repository provides a script (`run_servers.sh`) using the TAD streaming content to demonstrate the sequential execution of server and gateway modes. This script can be executed to automatically run the servers.
    - Example usage:
      ```bash
@@ -56,10 +46,20 @@ The Python script `app.py` is designed to configure and run a media processing a
      
      to launch the gateway in default configuration
 
-4. **Viewing the Stream:**
+3. **Viewing the Stream:**
    - After launching the application, you can use dash.js or GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
    - (by default: http://127.0.0.1:8080/Manifest.mpd)
    - to use dash.js you will need to install a cors extension for your browser.
+
+4. **Advanced mode: manual launch of the Application:**
+   - Execute the appropriate launch script based on the desired mode:
+     - For running in server mode, execute `launch_server.sh`.
+     - For running in gateway mode, execute `launch_gateway.sh`.
+   - Example usage:
+     ```bash
+     ./scripts/launch_server.sh
+     ./scripts/launch_gateway.sh
+     ```
 
 ## Note
 
