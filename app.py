@@ -85,7 +85,7 @@ def main():
     
     elif mode == 'gateway':
         # Load source for gateway
-        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}"
+        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={server_args['ifce']}"
         src = fs.load_src(src_sess)
 
         # load dasher 
