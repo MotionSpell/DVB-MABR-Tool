@@ -53,8 +53,8 @@ The Python script `app.py` is designed to configure and run a media processing a
 
 4. **Advanced mode: manual launch of the Application:**
    - Execute the appropriate launch script based on the desired mode:
-     - For running in server mode, execute `launch_server.sh`.
-     - For running in gateway mode, execute `launch_gateway.sh`.
+     - For running in server mode with default multicast adreeses/options, execute ```python3 app.py config.ini mode=server stream_src="http_source_link" ```.
+     - For running in gateway mode, execute  with default multicast adreeses/options```python3 app.py config.ini mode=gateway ```.
    - Example usage:
      ```bash
      ./scripts/launch_server.sh
