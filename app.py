@@ -58,7 +58,7 @@ def main():
     if mode == 'server':
         gpac.set_logs("route@info")
     elif mode == 'gateway':
-        gpac.set_logs("http@info")
+        gpac.set_logs("http:dash@info")
 
     # Create session
     fs = gpac.FilterSession()
