@@ -14,6 +14,7 @@ def load_configuration(config_file):
     server_args = {}
     gateway_args = {}
     mode = ''
+    repair_args = {}
     for section in config.sections():
         if section == 'Source':
             src_args = dict(config['Source'])
@@ -23,7 +24,9 @@ def load_configuration(config_file):
             gateway_args = dict(config['Gateway'])
         elif section == 'Mode':
             mode = config['Mode'].get('mode', '').lower()
-    return src_args, server_args, gateway_args, mode
+        elif section == 'Repair':
+            repair_args = dict(config['Repair'])
+    return src_args, server_args, gateway_args, mode, repair_args
 
 def main():
     # Parse command-line arguments
@@ -34,7 +37,7 @@ def main():
     config_file = sys.argv[1]
 
     # Load configuration from the specified file
-    src_args, server_args, gateway_args, mode = load_configuration(config_file)
+    src_args, server_args, gateway_args, mode, repair_args = load_configuration(config_file)
 
     # Merge command-line arguments with configuration
     for arg in sys.argv[2:]:
@@ -85,7 +88,8 @@ def main():
     
     elif mode == 'gateway':
         # Load source for gateway
-        src_sess = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={gateway_args['ifce']}"
+        src_sess_base = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={gateway_args['ifce']}:repair={gateway_args['repair']}"
+        src_sess = src_sess_base + (f"::repair_url={repair_args['repair_url']}" if gateway_args['repair'] == "full" else "")
         src = fs.load_src(src_sess)
 
         # load dasher 
