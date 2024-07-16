@@ -27,7 +27,7 @@ The Python script `app.py` is designed to configure and run a media processing a
      ```bash
      ./run_servers.sh
      ```
-     Than chose wich TAD stream to excute:
+     Than chose wich TAD stream to execute:
 
      ```bash
      Choose a stream source:
@@ -47,7 +47,7 @@ The Python script `app.py` is designed to configure and run a media processing a
      to launch the gateway in default configuration
 
 3. **Viewing the Stream:**
-   - After launching the application, you can use dash.js or GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
+   - After launching the application, you can use dash.js or the GPAC player to view the stream. The playback link will be provided in the terminal output for gateway mode.
    - (by default: http://127.0.0.1:8080/Manifest.mpd)
    - to use dash.js you will need to install a cors extension for your browser.
 
@@ -67,6 +67,7 @@ Troubleshoot:
 - Ensure that the GPAC library is properly installed and on your system.
 - Additional parameters and configurations can be added to the `config.ini` file as needed.
 - The GPAC Python bindings use ctypes for interfacing with libgpac filter session, while providing an object-oriented wrapper hiding all ctypes internals and GPAC C design.
+- The timeout of the repair mode depends on [this patch](https://github.com/gpac/gpac/compare/master...rbouqueau:buildbot-mabr_client_object_timeout?expand=1) which is not yet in GPAC master.
 
 You must:
 - Use the bindings which come along with your GPAC installation, otherwise ABI/API might mismatch, resulting in crashes.
