@@ -60,6 +60,9 @@ The Python script `app.py` is designed to configure and run a media processing a
      ./scripts/launch_server.sh
      ./scripts/launch_gateway.sh
      ```
+   - Notes on configurable options:
+     - To select how the URI of objects delived should be constructed use the option: "fdt_absolute_url" in the global configuration file.
+     - To select how the manifests and init segments are delivered use the option: "use_inband_transport" in the global configuration file.
 
 ## Note
 
