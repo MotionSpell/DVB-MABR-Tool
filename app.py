@@ -72,7 +72,7 @@ def main():
         if 'stream_src' in src_args and src_args['stream_src'].strip():  # Check if stream_src is not empty
             src_filter = src_args['stream_src']
             src = fs.load_src(src_filter)
-            dasher = fs.load("dashin:forward=file")
+            dasher = fs.load("dashin:forward=file:split_as")
             
         else:
             src_filter = "avgen"
@@ -93,7 +93,7 @@ def main():
         src = fs.load_src(src_sess)
 
         # load dasher 
-        dasher= fs.load("dashin:forward=file")
+        dasher= fs.load("dashin:forward=file:split_as")
         
         #load http server
         dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
