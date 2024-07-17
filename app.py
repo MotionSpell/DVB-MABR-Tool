@@ -82,7 +82,7 @@ def main():
             dasher = fs.load("dasher:dynamic:profile=live")
 
         # Load destination filter for server mode
-        dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}:furl={server_args['fdt_absolute_url']}:carousel={server_args['carousel']}:ifce={server_args['ifce']}"
+        dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}:furl={server_args['fdt_absolute_url']}:carousel={server_args['carousel']}:ifce={server_args['ifce']}:use_inband={server_args['use_inband_transport']}"
         dst_filter = dst_filter_base + (":llmode" if server_args['low_latency'] == "true" else "")
         dst = fs.load_dst(dst_filter)
     
