@@ -93,7 +93,9 @@ def main():
         src = fs.load_src(src_sess)
 
         # load dasher 
-        dasher= fs.load("dashin:forward=file:split_as")
+        dasher_base= f"dashin:forward=file:split_as:keep_burl={gateway_args['keep_base_url']}"
+        dasher_string = dasher_base + (f":relative_url={gateway_args['relative_url']}" if gateway_args['keep_base_url'] == "inject" else "")
+        dasher= fs.load(dasher_string)
         
         #load http server
         dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
