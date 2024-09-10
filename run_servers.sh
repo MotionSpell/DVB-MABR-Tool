@@ -33,6 +33,14 @@ force_terminate() {
     fi
 }
 
+sigint_handler() {
+    echo "SIGINT caught - forcing termination ..."
+    force_terminate
+    exit 1
+}
+
+trap 'sigint_handler' SIGINT
+
 # Ask user for choice
 echo "Choose a stream source:"
 echo "A: Live segment template without manifest updates"
