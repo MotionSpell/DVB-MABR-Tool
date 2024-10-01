@@ -86,8 +86,10 @@ def main():
     
     elif mode == 'gateway':
         # Load source for gateway
-        src_sess_base = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={gateway_args['ifce']}:repair={gateway_args['repair']}:nbcached={gateway_args['nbcached']}"
-        src_sess = src_sess_base + (f"::repair_url={repair_args['repair_url']}" if gateway_args['repair'] == "full" else "")
+        repair_urls = ",".join(repair_args['repair_urls'].split('\n'))
+        src_sess_base = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={gateway_args['ifce']}:repair={repair_args['repair']}:nbcached={gateway_args['nbcached']}"
+        src_sess = src_sess_base + (f"::repair_urls={repair_urls}" if repair_urls!="" else "")
+        print(src_sess)
         src = fs.load_src(src_sess)
 
         # load dasher 
