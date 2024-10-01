@@ -58,10 +58,6 @@ def main():
     opts = ["myapp"]
     opts.append("-no-block")
     gpac.set_args(opts)
-    if mode == 'server':
-        gpac.set_logs("route@info")
-    elif mode == 'gateway':
-        gpac.set_logs("http:dash@info")
 
     # Create session
     fs = gpac.FilterSession()
@@ -86,6 +82,7 @@ def main():
         dst_filter = (dst_filter_base + (":llmode" if server_args['low_latency'] == "true" else "")
                                         + (f":errsim={server_args['errsim']}" if server_args.get('errsim') else ""))
         dst = fs.load_dst(dst_filter)
+        gpac.set_logs(server_args["logs"])
     
     elif mode == 'gateway':
         # Load source for gateway
@@ -102,6 +99,7 @@ def main():
         dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
         print(f"playback link   :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}")
         dst = fs.load_dst(dst_sess)
+        gpac.set_logs(gateway_args["logs"])
         
     else:
         print("Invalid mode specified in configuration file")
