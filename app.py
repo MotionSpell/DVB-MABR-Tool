@@ -57,6 +57,7 @@ def main():
     # Prepare options for libgpac
     opts = ["myapp"]
     opts.append("-no-block")
+    opts.append(":no-h2")
     gpac.set_args(opts)
 
     # Create session
@@ -76,9 +77,10 @@ def main():
             aenc = fs.load(f"ffenc:c={src_args.get('a_enc', 'aac')}")
             venc = fs.load(f"ffenc:c={src_args.get('v_enc', 'avc')}")
             dasher = fs.load("dasher:dynamic:profile=live")
+            manifest_src={server_args['manifest_src']}
 
         # Load destination filter for server mode
-        dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}:furl={server_args['fdt_absolute_url']}:carousel={server_args['carousel']}:ifce={server_args['ifce']}:use_inband={server_args['use_inband_transport']}"
+        dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}/manifest_src:furl={server_args['fdt_absolute_url']}:carousel={server_args['carousel']}:ifce={server_args['ifce']}:use_inband={server_args['use_inband_transport']}"
         dst_filter = (dst_filter_base + (":llmode" if server_args['low_latency'] == "true" else "")
                                         + (f":errsim={server_args['errsim']}" if server_args.get('errsim') else ""))
         dst = fs.load_dst(dst_filter)
@@ -98,8 +100,8 @@ def main():
         dasher= fs.load(dasher_string)
         
         #load http server
-        dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}" 
-        print(f"playback link   :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}")
+        dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}:max_cache_segs={gateway_args['max_segs']}"
+        print(f"playback link  :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}")
         dst = fs.load_dst(dst_sess)
         gpac.set_logs(gateway_args["logs"])
         
