@@ -4,7 +4,7 @@
 stream_sources=(
     "https://livesim2.dashif.org/livesim2/testpic_2s/Manifest.mpd"
     "https://livesim2.dashif.org/livesim2/mup_30/testpic_2s/Manifest.mpd"
-    "https://livesim2.dashif.org/livesim2/segtimeline_1/testpic_2s/Manifest.mpd"
+    "" # "https://livesim2.dashif.org/livesim2/segtimeline_1/testpic_2s/Manifest.mpd"
     "https://livesim2.dashif.org/livesim2/periods_60/continuous_1/testpic_2s/Manifest.mpd"
     "https://akamaibroadcasteruseast.akamaized.net/cmaf/live/657078/akasource/out.mpd"
     "https://cmafref.akamaized.net/cmaf/live-ull/2006350/akambr/out.mpd"

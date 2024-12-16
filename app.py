@@ -57,7 +57,8 @@ def main():
     # Prepare options for libgpac
     opts = ["myapp"]
     opts.append("-no-block")
-    opts.append(":no-h2")
+    opts.append("-no-h2")
+    opts.append("-rescan-fonts")
     gpac.set_args(opts)
 
     # Create session
@@ -70,13 +71,13 @@ def main():
             src_filter = src_args['stream_src']
             src = fs.load_src(src_filter)
             dasher = fs.load("dashin:forward=file:split_as")
-            
+
         else:
-            src_filter = "avgen"
-            src = fs.load_src(src_filter)
+            src = fs.load_src("avgen")
             aenc = fs.load(f"ffenc:c={src_args.get('a_enc', 'aac')}")
             venc = fs.load(f"ffenc:c={src_args.get('v_enc', 'avc')}")
-            dasher = fs.load("dasher:dynamic:profile=live")
+            reframer = fs.load(f"reframer:rt=on")
+            dasher = fs.load("dasher:dmode=dynamic:stl")
             manifest_src={server_args['manifest_src']}
 
         # Load destination filter for server mode
@@ -100,7 +101,7 @@ def main():
         dasher= fs.load(dasher_string)
         
         #load http server
-        dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size={gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}:max_cache_segs={gateway_args['max_segs']}"
+        dst_sess =  f"{gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}:rdirs={gateway_args['rdirs']}:max_cache_size=-{gateway_args['max_cache_size']}:reqlog='*':cors=auto:sutc={gateway_args['sutc']}:max_cache_segs={gateway_args['max_segs']}"
         print(f"playback link  :  {gateway_args['ip_addr']}:{gateway_args['port_addr']}/{gateway_args['dst']}")
         dst = fs.load_dst(dst_sess)
         gpac.set_logs(gateway_args["logs"])
