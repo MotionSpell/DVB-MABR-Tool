@@ -77,8 +77,8 @@ def main():
             aenc = fs.load(f"ffenc:c={src_args.get('a_enc', 'aac')}")
             venc = fs.load(f"ffenc:c={src_args.get('v_enc', 'avc')}")
             reframer = fs.load(f"reframer:rt=on")
-            dasher = fs.load("dasher:dmode=dynamic:stl:tsb=64")
-            manifest_src={server_args['manifest_src']}
+            dasher = fs.load("dasher:dmode=dynamic:stl:tsb=63")
+            manifest_src=server_args['manifest_src']
 
         # Load destination filter for server mode
         dst_filter_base = f"{server_args['protocol']}{server_args['ip_dst']}:{server_args['port_dst']}/{manifest_src}:furl={server_args['fdt_absolute_url']}:carousel={server_args['carousel']}:ifce={server_args['ifce']}:use_inband={server_args['use_inband_transport']}"
