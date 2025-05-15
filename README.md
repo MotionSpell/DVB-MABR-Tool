@@ -67,10 +67,12 @@ The Python script `app.py` is designed to configure and run a media processing a
 ## Note
 
 Troubleshoot:
+- Error or warning messages should be processed by order of appearance. There is a butterfly effect in errors so try to identify the root error.
 - Ensure that the GPAC library is properly installed on your system.
 - Additional parameters and configurations can be added to the `config.ini` file as needed.
 - The GPAC Python bindings use ctypes for interfacing with libgpac filter session, while providing an object-oriented wrapper hiding all ctypes internals and GPAC C design.
 - The timeout of the repair mode depends on [this patch](https://github.com/gpac/gpac/compare/master...rbouqueau:buildbot-mabr_client_object_timeout?expand=1) which is not yet in GPAC master.
+- In case of gateway errors, one can check the state of the HTTP cache by replace the `gmem` value of `rdirs = gmem` by any valid folder. Then inspect this cache folder.
 
 You must:
 - Use the bindings which come along with your GPAC installation, otherwise ABI/API might mismatch, resulting in crashes.
