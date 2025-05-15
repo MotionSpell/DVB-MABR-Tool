@@ -59,6 +59,8 @@ def main():
     opts.append("-no-block")
     opts.append("-no-h2")
     opts.append("-rescan-fonts")
+    #opts.append("-logs=core@debug")
+    #opts.append("-font-dirs=/System/Library/Fonts")
     gpac.set_args(opts)
 
     # Create session
@@ -85,6 +87,13 @@ def main():
         dst_filter = (dst_filter_base + (":llmode" if server_args['low_latency'] == "true" else "")
                                         + (f":errsim={server_args['errsim']}" if server_args.get('errsim') else ""))
         dst = fs.load_dst(dst_filter)
+
+        # Setup repair servers re-using the same DASH session
+        if repair_args['repair'] != "no":
+            for server in repair_args['repair_urls'].split('\n'):
+                repair_filter = server + f"/{manifest_src}:ifce={server_args['ifce']}:rdirs=gmem:max_cache_segs=32"
+                fs.load_dst(repair_filter)
+
         gpac.set_logs(server_args["logs"])
     
     elif mode == 'gateway':
