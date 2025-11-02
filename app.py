@@ -59,6 +59,8 @@ def main():
     opts.append("-no-block")
     opts.append("-no-h2")
     opts.append("-rescan-fonts")
+    #opts.append("--chkiso")
+    opts.append("--minrecv=0")
     #opts.append("-logs=core@debug")
     #opts.append("-font-dirs=/System/Library/Fonts")
     gpac.set_args(opts)
@@ -92,7 +94,9 @@ def main():
         if repair_args['repair'] != "no":
             for server in repair_args['repair_urls'].split('\n'):
                 repair_filter = server + f"/{manifest_src}:ifce={server_args['ifce']}:rdirs=gmem:max_cache_segs=32"
-                fs.load_dst(repair_filter)
+                # Use source instead of multicast server for repair
+                # fs.load_dst(repair_filter)
+                repair_args['repair_urls'] = src_args['stream_src']
 
         gpac.set_logs(server_args["logs"])
     
@@ -104,10 +108,9 @@ def main():
             repair_urls = ",".join(repair_args['repair_urls'].split('\n'))
         src_sess_base = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={gateway_args['ifce']}:repair={repair_args['repair']}:nbcached={gateway_args['nbcached']}"
         src_sess = src_sess_base + (f"::repair_urls={repair_urls}" if repair_urls!="" else "")
-        print(src_sess)
         src = fs.load_src(src_sess)
 
-        # load dasher 
+        # load dash client
         dasher_base= f"dashin:forward=file:split_as:keep_burl={gateway_args['keep_base_url']}"
         dasher_string = dasher_base + (f":relative_url={gateway_args['relative_url']}" if gateway_args['keep_base_url'] == "inject" else "")
         dasher= fs.load(dasher_string)
