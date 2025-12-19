@@ -59,7 +59,7 @@ def main():
     opts.append("-no-block")
     opts.append("-no-h2")
     opts.append("-rescan-fonts")
-    #opts.append("--chkiso")
+    opts.append("--chkiso")
     opts.append("--minrecv=0")
     #opts.append("-logs=core@debug")
     #opts.append("-font-dirs=/System/Library/Fonts")
@@ -105,7 +105,7 @@ def main():
         if repair_args['repair'] == "no":
             repair_urls = ""
         else:
-            repair_urls = ",".join(repair_args['repair_urls'].split('\n'))
+            repair_urls = ",".join(src_args['stream_src'].split('\n'))
         src_sess_base = f"{gateway_args['protocol']}{gateway_args['ip_src']}:{gateway_args['port_src']}:ifce={gateway_args['ifce']}:repair={repair_args['repair']}:nbcached={gateway_args['nbcached']}"
         src_sess = src_sess_base + (f"::repair_urls={repair_urls}" if repair_urls!="" else "")
         src = fs.load_src(src_sess)
